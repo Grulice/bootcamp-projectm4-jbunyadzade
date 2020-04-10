@@ -53,6 +53,7 @@ function initializePage() {
       currSelects.from.appendChild(fromOption);
       currSelects.to.appendChild(option);
     }
+    handleToChange();
   });
   currSelects.from.addEventListener("change", handleChangeCurrency_from);
   currSelects.to.addEventListener("change", handleChangeCurrency_to);
@@ -114,7 +115,7 @@ function changeCurrency_from(eventSource) {
   let pressedButton = eventSource;
   // if we pressed the option element - we want its parent (select) to change classes
   if (pressedButton.tagName === "SELECT") {
-    fromCurrency = pressedButton.selectedOptions[0].value;
+    fromCurrency = pressedButton.value;
   }
   if (pressedButton.tagName === "LI") {
     fromCurrency = pressedButton.innerText;
