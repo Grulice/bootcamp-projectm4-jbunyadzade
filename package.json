@@ -1,0 +1,26 @@
+{
+  "name": "bcm4_jb",
+  "version": "1.0.0",
+  "description": "Javid Bunyadzade's M4 project for Bootcamp",
+  "main": "script.js",
+  "scripts": {
+    "start": "node script.js",
+    "prettier:fix": "prettier \"script.js\" --write",
+    "build": "webpack",
+    "build:prod": "webpack --config webpack.prod.config.js"
+  },
+  "author": "Javid B.",
+  "license": "ISC",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "dayjs": "^1.8.23"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "prettier": "^2.0.4",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}

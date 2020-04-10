@@ -1,0 +1,358 @@
+/* main content styling comes after the footer */
+
+/* Reset all default padding and margins */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Remove underlines for all links */
+a {
+  text-decoration: none;
+}
+
+/* Make a fixed header and footer */
+header,
+footer {
+  /* position: fixed; */
+
+  /* Font family is defined here to avoid conflicts with <main> */
+  font-family: "Source Sans Pro", sans-serif;
+  z-index: 1000;
+}
+
+header {
+  padding: 0 10%;
+  width: 100%;
+  position: fixed;
+
+  height: 60px;
+  top: 0;
+}
+
+/* Prevent main from clipping fixed parts */
+main {
+  padding: 60px 0 265px 0;
+}
+
+/* Blocks of the footer are individually padded to 0 10% to preserve bgcolor */
+footer {
+  width: 100%;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #f5f5f6;
+}
+
+header img {
+  height: 30px;
+}
+
+nav {
+  flex-grow: 2;
+
+  margin: 20px 0px 20px 0px;
+}
+
+.nav-list,
+.footer-links-list {
+  display: flex;
+
+  list-style-type: none;
+}
+
+.nav-list li {
+  margin: auto;
+  padding: 0 10px;
+}
+
+.nav-list-button {
+  color: grey;
+  font-weight: bold;
+}
+
+.nav-list-button:hover {
+  color: black;
+}
+
+.button-signin {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+/* End of header styling */
+
+/* Footer styling */
+footer {
+  bottom: 0;
+
+  padding-top: 3px;
+  background-color: #f5f5f6;
+}
+
+.footer-head {
+  background-color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* min-width: 1260px; */
+
+  margin-bottom: 15px;
+
+  padding: 0 10%;
+  padding-bottom: 10px;
+}
+
+.footer-links {
+  flex-grow: 1;
+}
+
+.footer-links p {
+  margin: 10px 0;
+}
+
+.footer-links-list {
+  display: flex;
+  justify-content: space-between;
+
+  /* padding-right: 40px; */
+  margin: 10px 40px 0 0;
+}
+
+.footer-links-list li {
+  padding: 0 10px;
+
+  /* Prevent word wrapping when viewport width gets small */
+  white-space: nowrap;
+}
+
+.footer-links-list li:first-child {
+  padding-left: 0;
+}
+
+.footer-links-button {
+  color: #833cde;
+}
+
+.footer-phonenum span {
+  font-size: x-large;
+  font-weight: bold;
+
+  white-space: nowrap;
+}
+.footer-phonenum p {
+  color: gray;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+footer hr {
+  margin: 30px 10%;
+  /* min-width: 1260px; */
+}
+
+.footer-disclaimer {
+  padding: 0 10%;
+  margin: 30px 0;
+}
+
+.footer-disclaimer p {
+  color: gray;
+
+  /* min-width: 1260px; */
+}
+
+.footer-endbar {
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+
+  min-width: 1170px;
+}
+
+.footer-copyright p {
+  color: gray;
+}
+
+.footer-socialbar a {
+  margin: 0 10px;
+}
+
+.footer-socialbar a:last-child {
+  margin-right: 0;
+}
+.footer-socialbar a svg {
+  height: 1.3em;
+  color: gray;
+}
+/* End of footer styling */
+
+/* main content style begins here */
+main {
+  position: relative;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.main-container {
+  padding: 50px 10%;
+}
+
+.converter-container {
+  display: flex;
+}
+
+.swap-button-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 60px;
+  margin: 0 30px;
+  padding-bottom: 25px;
+}
+
+.swap-button svg {
+  width: 60px;
+}
+
+.swap-button:hover svg {
+  fill: grey;
+}
+
+.swap-button:active svg {
+  fill: rgb(182, 182, 182);
+}
+
+.header-label {
+  margin: 10px 0;
+  color: #c6c6c6;
+}
+
+.currency-select-bar {
+  display: flex;
+  justify-content: stretch;
+
+  list-style-type: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.currency-select-bar li {
+  color: #c6c6c6;
+  padding: 10px 10px;
+  flex-grow: 1;
+  border-right: 1px solid #e5e5e5;
+  cursor: pointer;
+  text-align: center;
+}
+.currency-select-bar li:hover {
+  background-color: rgb(146, 88, 221);
+  color: white;
+}
+
+.currency-select-bar .selected {
+  background-color: #833ae0;
+  color: white;
+}
+
+.currency-select-bar li:last-child {
+  border-right: none;
+  padding: 0;
+  display: flex;
+  position: relative;
+}
+
+.currency-select-bar li:last-child:hover .currency-select,
+.currency-select-bar li:last-child:hover .dropdown-arrow svg path{
+  background-color: rgb(146, 88, 221);
+  color: white;
+  stroke: white;
+}
+
+
+.currency-select {
+  flex-grow: 1;
+  cursor: pointer;
+  border: none;
+  height: 100%;
+  text-align: center;
+  font: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 5px;
+
+  /* костыль для хрома */
+  text-align-last:center;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  right: 0;
+  font-size: 1em;
+  pointer-events: none;
+  padding-right: 7px;
+}
+
+.input-container {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+/* remove up/down arrows for the number input */
+/* Chrome, Safari, Edge, Opera */
+.input-container input::-webkit-outer-spin-button,
+.input-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.input-container input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-container input {
+  border: none;
+  font-size: 32px;
+  padding: 20px 0;
+
+  /* outline: none; */
+}
+
+.input-container p {
+  color: #c6c6c6;
+}
+
+.loading-screen {
+  display: flex;
+  /* display: none; */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(128, 128, 128, 0.603);
+  left: 0;
+  top: 0;
+}
+
+.loading-plaque {
+  padding: 20px 50px;
+  background-color: white;
+}
+
+.invisible {
+  display: none;
+}

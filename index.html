@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>M4 - Конвертер Валют - Джавид Бунят-заде</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <script src="script.js" defer></script> -->
+    <script src="./dist/main.minified.js" defer></script>
+    <!-- <script src="./dist/app.js" defer></script> -->
+  </head>
+
+  <body>
+    <header>
+      <img
+        src="https://payments.pashabank.az/payment3d/assets/images/logo_en.png;jsessionid=E2DCF81A9031550F3068263B435FB633"
+        alt="Bank logo"
+      />
+      <nav>
+        <ul class="nav-list">
+          <li><a class="nav-list-button" href="#">БАНК</a></li>
+          <li><a class="nav-list-button" href="#">БИЗНЕС</a></li>
+          <li><a class="nav-list-button" href="#">ИНВЕСТИЦИИ</a></li>
+          <li><a class="nav-list-button" href="#">СТРАХОВАНИЕ</a></li>
+          <li><a class="nav-list-button" href="#">МОБАЙЛ</a></li>
+          <li><a class="nav-list-button" href="#">ПУТЕШЕСТВИЯ</a></li>
+          <li><a class="nav-list-button" href="#">РАЗВЛЕЧЕНИЯ</a></li>
+        </ul>
+      </nav>
+      <div class="button-signin">
+        <a href="#">Войти</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="main-container">
+        <h1>Конвертер валют онлайн</h1>
+        <div class="converter-container">
+          <!-- from container -->
+          <div class="from-container">
+            <p class="header-label">У меня есть</p>
+            <ul id="from-currency-select-bar" class="currency-select-bar">
+              <li class="selected" value="RUB">RUB</li>
+              <li value="USD">USD</li>
+              <li value="EUR">EUR</li>
+              <li value="GBP">GBP</li>
+              <li>
+                <select
+                  class="currency-select"
+                  name=""
+                  id="from-currency-select"
+                >
+                </select>
+                <span class="dropdown-arrow"
+                  ><svg
+                    width="10"
+                    height="9"
+                    viewBox="0 0 10 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 4.09619L5.0962 8.19239L9.19239 4.09619"
+                      stroke="black"
+                    />
+                  </svg>
+                </span>
+              </li>
+            </ul>
+            <div class="input-container">
+              <input type="number" step="0.001" min="0" id="input-from" />
+              <p id="from-rate-caption">from-rate caption</p>
+            </div>
+          </div>
+
+          <!-- swap button -->
+          <div class="swap-button-container">
+            <a href="#" class="swap-button"
+              ><svg
+                id="Layer"
+                enable-background="new 0 0 64 64"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m10 26h39.172l-3.586 3.586c-.781.781-.781 2.047 0 2.828.391.391.902.586 1.414.586s1.023-.195 1.414-.586l7-7c.781-.781.781-2.047 0-2.828l-7-7c-.781-.781-2.047-.781-2.828 0s-.781 2.047 0 2.828l3.586 3.586h-39.172c-1.104 0-2 .896-2 2s.896 2 2 2z"
+                />
+                <path
+                  d="m54 38h-39.172l3.586-3.586c.781-.781.781-2.047 0-2.828-.78-.781-2.048-.781-2.828 0l-7 7c-.781.781-.781 2.047 0 2.828l7 7c.39.391.902.586 1.414.586s1.024-.195 1.414-.586c.781-.781.781-2.047 0-2.828l-3.586-3.586h39.172c1.104 0 2-.896 2-2s-.896-2-2-2z"
+                /></svg
+            ></a>
+          </div>
+
+          <!-- to container -->
+          <div class="to-container">
+            <p class="header-label">Хочу приобрести</p>
+            <ul id="to-currency-select-bar" class="currency-select-bar">
+              <li value="RUB">RUB</li>
+              <li class="selected" value="USD">USD</li>
+              <li value="EUR">EUR</li>
+              <li value="GBP">GBP</li>
+              <li>
+                <select class="currency-select" name="" id="to-currency-select">
+                </select>
+                <span class="dropdown-arrow"
+                  ><svg
+                    width="10"
+                    height="9"
+                    viewBox="0 0 10 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 4.09619L5.0962 8.19239L9.19239 4.09619"
+                      stroke="black"
+                    />
+                  </svg>
+                </span>
+              </li>
+            </ul>
+            <div class="input-container">
+              <input
+                type="number"
+                value="1"
+                step="0.001"
+                min="0"
+                id="input-to"
+              />
+              <p id="to-rate-caption">to-rate caption</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loading-screen invisible">
+        <div class="loading-plaque">Loading...</div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-head">
+        <div class="footer-links">
+          <p>
+            <strong>Банк</strong>
+          </p>
+          <ul class="footer-links-list">
+            <li><a class="footer-links-button" href="#">О Банке</a></li>
+            <li><a class="footer-links-button" href="#">Новости</a></li>
+            <li><a class="footer-links-button" href="#">Работа</a></li>
+            <li><a class="footer-links-button" href="#">Контакты</a></li>
+            <li><a class="footer-links-button" href="#">Помощь</a></li>
+            <li><a class="footer-links-button" href="#">Безопасность</a></li>
+            <li><a class="footer-links-button" href="#">For investors</a></li>
+          </ul>
+        </div>
+        <div class="footer-phonenum">
+          <span>8 800 666-43-07</span>
+          <p>Для звонков по России</p>
+        </div>
+      </div>
+
+      <hr />
+      <div class="footer-disclaimer">
+        <p>
+          АО "Банк" использует файлы "Cookie" с целью персонализации сервисов и
+          повышения удобства пользования веб-сайтом. "Cookie" представляют собой
+          небольшие файлы, содержащие информацию о предыдущих посещениях
+          веб-сайта. Если вы не хотите использовать файлы "Cookie", измените
+          настройки браузера.
+        </p>
+      </div>
+      <hr />
+
+      <div class="footer-endbar">
+        <div class="footer-copyright">
+          <p>
+            (c) 2019-2020, AO "Банк" Официальный сайт, лицензия ЦБ РФ № 8765
+          </p>
+        </div>
+        <div class="footer-socialbar">
+          <a href="https://twitter.com/"
+            ><svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="twitter"
+              class="svg-inline--fa fa-twitter fa-w-16"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+              ></path></svg
+          ></a>
+          <a href="https://www.facebook.com/"
+            ><svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="facebook-square"
+              class="svg-inline--fa fa-facebook-square fa-w-14"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="currentColor"
+                d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"
+              ></path></svg
+          ></a>
+          <a href="https://telegram.org/"
+            ><svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fab"
+              data-icon="telegram-plane"
+              class="svg-inline--fa fa-telegram-plane fa-w-14"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="currentColor"
+                d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z"
+              ></path></svg
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
