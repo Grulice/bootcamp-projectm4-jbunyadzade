@@ -204,10 +204,12 @@ main {
 }
 .main-container {
   padding: 50px 10%;
+  width: 90%;
 }
 
 .converter-container {
   display: flex;
+  justify-content: space-between;
 }
 
 .swap-button-container {
@@ -333,6 +335,24 @@ main {
 
 .input-container p {
   color: #c6c6c6;
+}
+
+.chart-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  border: 1px solid #c6c6c6;
+  border-radius: 3px;
+}
+
+.button-show-chart {
+  padding: 5px;
+}
+
+#main-chart {
+  display: none;
 }
 
 .loading-screen {

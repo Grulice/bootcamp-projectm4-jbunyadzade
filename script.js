@@ -1,3 +1,6 @@
+const Chart = require("chart.js");
+const dayjs = require("dayjs");
+
 const currSelectBars = {
   from: document.querySelector("#from-currency-select-bar"),
   to: document.querySelector("#to-currency-select-bar"),
@@ -72,6 +75,9 @@ function initializePage() {
 
   // add a listener to the swap button
   swapButton.addEventListener("click", handleSwap);
+
+  // draw the chart
+  drawChart();
 }
 
 function handleFetch(fetchURL) {
@@ -134,6 +140,9 @@ function changeCurrency_from(eventSource) {
   currSelects.from.classList.remove("selected");
 
   pressedButton.classList.add("selected");
+
+  // draw chart
+  drawChart();
 }
 
 function handleChangeCurrency_to(evt) {
@@ -173,6 +182,9 @@ function changeCurrency_to(eventSource) {
   currSelects.to.classList.remove("selected");
 
   pressedButton.classList.add("selected");
+
+  // draw chart
+  drawChart();
 }
 
 function renderCaptions() {
@@ -226,7 +238,7 @@ function handleSwap(evt) {
   currSelects.to.querySelectorAll("option").forEach((option) => {
     if (option.value === oldTo) {
       currSelects.from.value = option.value;
-      changeCurrency_from(currSelects.from)
+      changeCurrency_from(currSelects.from);
     }
   });
 
@@ -239,4 +251,85 @@ function handleSwap(evt) {
       changeCurrency_to(currSelects.to);
     }
   });
+}
+
+// chart drawing logic
+
+let chartContext = document.getElementById("main-chart").getContext("2d");
+
+function drawChart() {
+  let week = getPastWeek();
+  let currencyValues = getRatesForDays(week);
+
+  currencyValues.then((rateObjects) => {
+    let labelDates = week;
+    let finalData = rateObjects.map((elem) => elem.rates[toCurrency]);
+
+    Chart.defaults.global.defaultFontFamily = '"Source Sans Pro", sans-serif';
+    let chartMain = new Chart(chartContext, {
+      type: "line",
+      data: {
+        labels: labelDates,
+        datasets: [
+          {
+            label: fromCurrency,
+            data: finalData,
+            backgroundColor: 'rgba(131, 60, 222, 0.3)',
+            borderColor: '#833cde',
+            borderWidth: 1
+          },
+        ],
+      },
+      options: {
+        title: {
+          display:true,
+          text: 'Курс за последнюю неделю',
+          fontSize: 20
+        },
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: toCurrency,
+              },
+            },
+          ],
+        },
+      },
+    });
+  });
+}
+
+function getPastWeek() {
+  let now = dayjs();
+  let pastweek = [];
+  let curdate = now;
+  for (let i = 0; i < 7; i++) {
+    pastweek.push(curdate.format("YYYY-MM-DD"));
+    curdate = curdate.subtract("1", "day");
+  }
+
+  return pastweek.reverse();
+}
+
+function getRatesForDays(days) {
+  if (fromCurrency === toCurrency) {
+    // don't poll server if selected currencies are the same
+    let allOnes = [];
+    for (const day of days) {
+      const ratesObj = {};
+      ratesObj[toCurrency] = 1;
+      allOnes.push({ rates: ratesObj });
+    }
+    return Promise.resolve(allOnes);
+  }
+
+  let promises = [];
+  for (const day of days) {
+    let curURL = `https://api.ratesapi.io/api/${day}?base=${fromCurrency}&symbols=${toCurrency}`;
+    promises.push(handleFetch(curURL));
+  }
+
+  return Promise.all(promises);
 }
