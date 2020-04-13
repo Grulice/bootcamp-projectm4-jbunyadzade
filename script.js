@@ -285,7 +285,7 @@ function handleSwap(evt) {
 // chart drawing logic
 
 let chartContext = document.getElementById("main-chart").getContext("2d");
-
+let chartMain;
 function drawChart() {
   let week = getPastWeek();
   let currencyValues = getRatesForDays(week);
@@ -295,7 +295,10 @@ function drawChart() {
     let finalData = rateObjects.map((elem) => elem.rates[toCurrency]);
 
     Chart.defaults.global.defaultFontFamily = '"Source Sans Pro", sans-serif';
-    let chartMain = new Chart(chartContext, {
+    
+    // Destroy the chart before reusing it, as per chart.js documentation
+    if (chartMain !== undefined) chartMain.destroy();
+    chartMain = new Chart(chartContext, {
       type: "line",
       data: {
         labels: labelDates,
