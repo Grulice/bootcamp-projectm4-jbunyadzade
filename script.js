@@ -1,6 +1,9 @@
 const Chart = require("chart.js");
 const dayjs = require("dayjs");
 
+// for how long the exchange rate will be considered "fresh"
+const INFO_EXPIRY_THRESHOLD_SECONDS = 5;
+
 const currSelectBars = {
   from: document.querySelector("#from-currency-select-bar"),
   to: document.querySelector("#to-currency-select-bar"),
@@ -33,6 +36,7 @@ const loadingScreen = document.querySelector(".loading-screen");
 let fromCurrency = "RUB";
 let toCurrency = "USD";
 let curConversionRates = [];
+let lastRateFetchTime = Date.now();
 
 initializePage();
 
@@ -105,6 +109,8 @@ function getRatesForBase(baseCur) {
     ).then((result) => {
       // save the fetch result for future calculations
       curConversionRates = result;
+      // refresh the last fetch timestamp
+      lastRateFetchTime = Date.now();
       console.log(curConversionRates);
       return result;
     });
@@ -208,16 +214,39 @@ function convertCurrency(from, to, amount, isReverse) {
 
 function handleFromChange() {
   let currAmount = inputs.from.value;
-  inputs.to.value = convertCurrency(
-    fromCurrency,
-    toCurrency,
-    currAmount,
-    false
-  );
+  // check if the rates are still fresh
+  if (Date.now() - lastRateFetchTime > INFO_EXPIRY_THRESHOLD_SECONDS * 1000) {
+    getRatesForBase(fromCurrency).then((_) => {
+      inputs.to.value = convertCurrency(
+        fromCurrency,
+        toCurrency,
+        currAmount,
+        false
+      );
+    });
+  } else {
+    inputs.to.value = convertCurrency(
+      fromCurrency,
+      toCurrency,
+      currAmount,
+      false
+    );
+  }
 }
 
 function handleToChange() {
   let currAmount = inputs.to.value;
+  if (Date.now() - lastRateFetchTime > INFO_EXPIRY_THRESHOLD_SECONDS * 1000) {
+    getRatesForBase(fromCurrency).then((_) => {
+      inputs.from.value = convertCurrency(
+        toCurrency,
+        fromCurrency,
+        currAmount,
+        true
+      );
+    });
+  } else {
+  }
   inputs.from.value = convertCurrency(
     toCurrency,
     fromCurrency,
@@ -274,17 +303,17 @@ function drawChart() {
           {
             label: fromCurrency,
             data: finalData,
-            backgroundColor: 'rgba(131, 60, 222, 0.3)',
-            borderColor: '#833cde',
-            borderWidth: 1
+            backgroundColor: "rgba(131, 60, 222, 0.3)",
+            borderColor: "#833cde",
+            borderWidth: 1,
           },
         ],
       },
       options: {
         title: {
-          display:true,
-          text: 'Курс за последнюю неделю',
-          fontSize: 20
+          display: true,
+          text: "Курс за последнюю неделю",
+          fontSize: 20,
         },
         scales: {
           yAxes: [
