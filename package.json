@@ -12,7 +12,7 @@
   "author": "Javid B.",
   "license": "ISC",
   "dependencies": {
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "dayjs": "^1.8.23"
   },
   "devDependencies": {
